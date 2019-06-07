@@ -1,0 +1,20 @@
+/* here you can put your own css to customize and override the theme */
+.page-logo {
+    font-family: 'Open Sans',sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: #fff;
+}
+.page-logo:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.page-logo i,
+.page-logo span {
+    color: #ffcc29;
+}
+.coming-soon-header .page-logo,
+.logo .page-logo {
+    font-size: 36px;
+}
