@@ -11,15 +11,9 @@
 |
 */
 
-Route::get('/', function() {
-	return view('frontend.index');
-});
-Route::get('/blog', function() {
-	return view('frontend.blog');
-});
-Route::get('/detail_blog', function() {
-	return view('frontend.detail_blog');
-});
+Route::get('/', 'FrontOfficeController@index');
+Route::get('/blog', 'FrontOfficeController@blog');
+Route::get('/detail_blog/{slug}', 'FrontOfficeController@blog_detail');
 Route::get('/about', function() {
 	return view('frontend.about');
 });

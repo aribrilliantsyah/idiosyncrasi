@@ -47,54 +47,30 @@
             <div class="tab-content clearfix box">
             <div class="tab-pane active" id="nArrivals">
                 <div class="nArrivals owl-carousel">
-                    @for ($i = 0; $i < 10; $i++)
+
+                    @foreach($gallery as $item)
                     <div class="product-grid">
                         <div class="item">
                             <div class="product-thumb">
                                 <div class="image product-imageblock"> 
                                     <a href="#"> 
-                                        <img data-name="product_image" src="{{asset('darklook/images/product/product9.jpg')}}" alt="" title="" class="img-responsive"> 
-                                        <img src="{{asset('darklook/images/product/product9.jpg')}}" alt="" title="" class="img-responsive"> 
+                                        <img data-name="product_image" src="{{asset('/img/cover/'. $item->picture)}}" alt="" title="" class="img-responsive"> 
+                                        <img src="{{asset('/img/cover/'. $item->picture)}}" alt="" title="" class="img-responsive"> 
                                     </a>
-                                    <div class="button-group text-center">
-                                        <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
-                                        <div class="quickview"><a href="#"><span>Quick View</span></a></div>
-                                        <div class="compare"><a href="#"><span>Compare</span></a></div>
-                                        <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
-                                    </div>
                                 </div>
                                 <div class="caption product-detail text-center">
-                                    {{-- <div class="rating"> 
-                                        <span class="fa fa-stack">
-                                            <i class="fa fa-star-o fa-stack-1x"></i>
-                                            <i class="fa fa-star fa-stack-1x"></i>
-                                        </span> 
-                                        <span class="fa fa-stack">
-                                            <i class="fa fa-star-o fa-stack-1x"></i>
-                                            <i class="fa fa-star fa-stack-1x"></i>
-                                        </span>
-                                        <span class="fa fa-stack">
-                                            <i class="fa fa-star-o fa-stack-1x"></i>
-                                            <i class="fa fa-star fa-stack-1x"></i>
-                                        </span>
-                                        <span class="fa fa-stack">
-                                            <i class="fa fa-star-o fa-stack-1x"></i>
-                                            <i class="fa fa-star fa-stack-1x"></i>
-                                        </span> 
-                                        <span class="fa fa-stack">
-                                            <i class="fa fa-star-o fa-stack-1x"></i>
-                                            <i class="fa fa-star fa-stack-x"></i>
-                                        </span> 
-                                    </div> --}}
                                     <h6 data-name="product_name" class="product-name" style="margin-top: 15px">
-                                        <a href="#" title="Casual Shirt With Ruffle Hem">New LCDScreen and HD Video</a>
+                                        <a href="#" title="Casual Shirt With Ruffle Hem">{{$item->judul}}</a>
                                     </h6>
+                                    <span class="price">
+                                        <span class="amount"><span class="currencySymbol">Rp. {{$item->price}}</span>
+                                    </span>
                                 </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
             <div class="tab-pane" id="Bestsellers">
@@ -360,15 +336,9 @@
         <div class="row">
             <div class="col-sm-12">
             <div class="brand owl-carousel ptb_20">
-                <div class="item text-center"> <a href="#"><img src="images/brand/brand1.png" alt="Disney" class="img-responsive" /></a> </div>
-                <div class="item text-center"> <a href="#"><img src="images/brand/brand2.png" alt="Dell" class="img-responsive" /></a> </div>
-                <div class="item text-center"> <a href="#"><img src="images/brand/brand3.png" alt="Harley" class="img-responsive" /></a> </div>
-                <div class="item text-center"> <a href="#"><img src="images/brand/brand4.png" alt="Canon" class="img-responsive" /></a> </div>
-                <div class="item text-center"> <a href="#"><img src="images/brand/brand5.png" alt="Canon" class="img-responsive" /></a> </div>
-                <div class="item text-center"> <a href="#"><img src="images/brand/brand6.png" alt="Canon" class="img-responsive" /></a> </div>
-                <div class="item text-center"> <a href="#"><img src="images/brand/brand7.png" alt="Canon" class="img-responsive" /></a> </div>
-                <div class="item text-center"> <a href="#"><img src="images/brand/brand8.png" alt="Canon" class="img-responsive" /></a> </div>
-                <div class="item text-center"> <a href="#"><img src="images/brand/brand9.png" alt="Canon" class="img-responsive" /></a> </div>
+                @foreach($brand as $item)
+                    <div class="item text-center"> <a href="#"><img src="{{asset('img/brand/'.$item->img)}}" alt="" class="img-responsive" /></a> </div>
+                @endforeach
             </div>
             </div>
         </div>

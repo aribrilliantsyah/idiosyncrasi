@@ -2,7 +2,10 @@
 <!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="en">
 <!--<![endif]-->
-
+@php
+  $content = App\ContentSetup::first();
+  $category = App\KategoriGallery::all();
+@endphp
 <head>
   <!-- =====  BASIC PAGE NEEDS  ===== -->
   <meta charset="utf-8">
@@ -150,7 +153,7 @@
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse"> <span class="i-bar"><i class="fa fa-bars"></i></span></button>
             <div class="collapse navbar-collapse js-navbar-collapse">
               <ul id="menu" class="nav navbar-nav">
-                <li> <a href="index.html">Home</a></li>
+                <li> <a href="{{ url('/') }}">Home</a></li>
                 {{-- <li class="dropdown mega-dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Collection </a>
                   <ul class="dropdown-menu mega-dropdown-menu row">
                     <li class="col-md-3">
@@ -210,15 +213,14 @@
                 {{-- <li> <a href="category_page.html">Shop</a></li> --}}
                 <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products </a>
                   <ul class="dropdown-menu">
-                    <li> <a href="cart_page.html">Cart</a></li>
-                    <li> <a href="checkout_page.html">Checkout</a></li>
-                    <li> <a href="product_detail_page.html">Product Detail Page</a></li>
-                    <li> <a href="single_blog.html">Single Post</a></li>
+                    @foreach ($category as $item)
+                      <li> <a href="#">{{ $item->name }}</a></li>
+                    @endforeach
                   </ul>
                 </li>
-                <li> <a href="blog_page.html">Blog</a></li>
-                <li> <a href="about.html">About us</a></li>
-                <li> <a href="contact_us.html">Contact us</a></li>
+                <li> <a href="{{ url('blog') }}">Blog</a></li>
+                <li> <a href="#">About us</a></li>
+                <li> <a href="#">Contact us</a></li>
               </ul>
             </div>
             <!-- /.nav-collapse -->
@@ -228,12 +230,15 @@
     </header>
     <!-- =====  HEADER END  ===== -->
     <!-- =====  BANNER STRAT  ===== -->
-    {{-- <div class="banner">
-      <div class="main-banner owl-carousel">
-        <div class="item"><a href="#"><img src="{{asset('darklook/images/main_banner1.jpg')}}" alt="Main Banner" class="img-responsive" /></a></div>
-        <div class="item"><a href="#"><img src="{{asset('darklook/images/main_banner2.jpg')}}" alt="Main Banner" class="img-responsive" /></a></div>
+    @if(isset($slide_status) && !empty($slide))
+      <div class="banner">
+        <div class="main-banner owl-carousel">
+          @foreach($slide as $item)
+            <div class="item"><a href="#"><img src="{{asset('img/slide/'.$item->img)}}" alt="Main Banner" class="img-responsive" /></a></div>  
+          @endforeach
+        </div>
       </div>
-    </div> --}}
+    @endif
     <!-- =====  BANNER END  ===== -->
     <!-- =====  CONTAINER START  ===== -->
     @yield('content')
@@ -280,10 +285,10 @@
             <h6 class="footer-title ptb_20">Contacts</h6>
             <ul>
               <li>Warehouse & Offices,</li>
-              <li>12345 Street name, California USA</li>
-              <li>(+024) 666 888</li>
-              <li>leonode.wc@gmail.com</li>
-              <li><a href="http://www.lionode.com/">www.lionode.com</a></li>
+              <li>{{ $content->alamat }}</li>
+              <li>{{ $content->no_tlp }}</li>
+              <li>{{ $content->email }}</li>
+              <li><a href="{{ $content->nama_web }}">{{ $content->nama_web }}</a></li>
             </ul>
           </div>
         </div>
@@ -294,14 +299,15 @@
             <div class="col-sm-4">
               <div class="social_icon">
                 <ul>
-                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="#"><i class="fa fa-google"></i></a></li>
-                  <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                  <li><a href="{{$content->facebook}}"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="{{$content->twitter}}"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="{{$content->email}}"><i class="fa fa-google"></i></a></li>
+                  <li><a href="{{$content->instagram}}"><i class="fa fa-instagram"></i></a></li>
                 </ul>
               </div>
             </div>
             <div class="col-sm-4">
-              <div class="copyright-part text-center">@ 2017 All Rights Reserved Darklook</div>
+              <div class="copyright-part text-center">@ {{Carbon\Carbon::now()->format('Y')}} All Rights Reserved Darklook</div>
             </div>
             <div class="col-sm-4">
               <div class="payment-icon text-right">
